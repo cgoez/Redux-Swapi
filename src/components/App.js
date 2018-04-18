@@ -3,11 +3,13 @@ import { connect } from 'react-redux';
 
 import logo from '../logo.svg';
 import '../styles/App.css';
+import fetchSwapi from '../actions';
 // pull in actions from action/index
 
 class App extends Component {
   componentDidMount() {
     // call our action
+    this.props.fetchSwapi();
   }
   render() {
     return (
@@ -23,6 +25,14 @@ class App extends Component {
         )}
       </div>
     );
+  }
+}
+
+const mapStateToProps = state => {
+  return {
+    chars: state.chars,
+    fetching: state.fetching,
+    error: state.error
   }
 }
 
