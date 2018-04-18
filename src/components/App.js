@@ -1,12 +1,15 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
+import React, { Component } from "react";
+import { connect } from "react-redux";
 
-import logo from '../logo.svg';
-import '../styles/App.css';
-import fetchSwapi from '../actions';
+import logo from "../logo.svg";
+import "../styles/App.css";
+import fetchSwapi from "../actions";
 // pull in actions from action/index
 
 class App extends Component {
+  constructor(props) {
+    super(props)
+  }
   componentDidMount() {
     // call our action
     this.props.fetchSwapi();
@@ -30,14 +33,12 @@ class App extends Component {
 
 const mapStateToProps = state => {
   return {
-    chars: state.chars,
-    fetching: state.fetching,
-    error: state.error
-  }
-}
+    chars: state.charsReducer.chars,
+    fetching: state.charsReducer.fetching,
+    error: state.charsReducer.error
+  };
+};
 
 // our mapDispatchToProps needs to have two properties inherited from state
 // the chars and the fetching boolean
-export default connect(null, {
-  /* actions go here */
-})(App);
+export default connect(mapStateToProps, { fetchSwapi })(App);
